@@ -18,8 +18,8 @@ spec:
     spec:
       containers:
       - name: backend-container
-        image: devops-backend:v1
-        imagePullPolicy: Never
+        image: aresden113/devops-backend:v2
+        imagePullPolicy: Always
 
         ports:
         - containerPort: 5000

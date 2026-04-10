@@ -12,7 +12,7 @@ print("DB_HOST:", host)
 
 @app.route('/')
 def home():
-         return 'Hello, Olivia!'
+         return "🔥 DevOps Platform V3 - Pipeline CI/CD + Kubernetes + despliegue automático en producción"
 
 @app.route("/health")
 def health():
