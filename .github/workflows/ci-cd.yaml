@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI Pipeline
 
 on:
   push:
@@ -6,12 +6,12 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set image tag
         run: echo "IMAGE_TAG=${{ github.run_number }}" >> $GITHUB_ENV
@@ -20,20 +20,15 @@ jobs:
         run: |
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Build image
+      - name: Build Docker image
         run: |
           docker build -t aresden113/devops-backend:$IMAGE_TAG ./app/server
 
-      - name: Push image
+      - name: Push Docker image
         run: |
           docker push aresden113/devops-backend:$IMAGE_TAG
 
-      - name: Set kubeconfig
+      - name: Tag as latest (optional)
         run: |
-          mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
-
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl set image deployment/backend-deployment \
-          backend=aresden113/devops-backend:$IMAGE_TAG
+          docker tag aresden113/devops-backend:$IMAGE_TAG aresden113/devops-backend:latest
+          docker push aresden113/devops-backend:latest
