@@ -13,20 +13,16 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
 
-    - name: Verify runner & cluster
-      run: |
-        echo "Runner OK"
-        kubectl config current-context
-        kubectl get nodes
+    - name: Verify cluster
+      run: kubectl get nodes
 
-    - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -f k8s/
+    - name: Apply manifests
+      run: kubectl apply -f k8s/
 
-    - name: Force rollout (ensure new image is pulled)
+    - name: Update image dynamically
       run: |
-        kubectl rollout restart deployment backend-deployment
+        kubectl set image deployment/backend-deployment \
+        backend-container=aresden113/devops-backend:${{ github.run_number }}
 
-    - name: Verify deployment
-      run: |
-        kubectl get pods -o wide
+    - name: Verify rollout
+      run: kubectl rollout status deployment/backend-deployment
