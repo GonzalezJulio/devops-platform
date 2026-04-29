@@ -4,6 +4,6 @@ metadata:
   name: backend-configmap
 
 data:
-  DB_HOST: postgres
+  DB_HOST: postgres-service.default.svc.cluster.local
   DB_USER: user
   DB_NAME: appdb

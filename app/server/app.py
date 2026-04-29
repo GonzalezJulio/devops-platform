@@ -9,7 +9,7 @@ app = Flask(__name__)
 REQUEST_COUNT = Counter('app_requests_total', 'Total de requests a la app')
 
 # 🌐 Variables de entorno
-host = os.getenv("DB_HOST")
+host = os.getenv("DB_HOST", "postgres-service.default.svc.cluster.local")
 user = os.getenv("DB_USER")
 password = os.getenv("DB_PASSWORD")
 db = os.getenv("DB_NAME")
@@ -24,7 +24,7 @@ def before_request():
 # 🏠 Endpoint principal
 @app.route('/')
 def home():
-    return "🔥 DevOps Platform V6 - Pipeline CI/CD + Kubernetes + despliegue automático en producción"
+    return "🔥 DevOps Platform V10 - Pipeline CI/CD + Kubernetes + despliegue automático en producción + Cluster personal"
 
 # ❤️ Healthcheck
 @app.route("/health")

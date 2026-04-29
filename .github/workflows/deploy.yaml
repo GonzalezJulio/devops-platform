@@ -18,6 +18,11 @@ jobs:
         mkdir -p $HOME/.kube
         echo "${{ secrets.KUBE_CONFIG }}" > $HOME/.kube/config
 
-    - name: Deploy to Kubernetes
+    - name: Deploy manifests
       run: |
         kubectl apply -f k8s/
+
+    - name: Update image in Kubernetes
+      run: |
+        kubectl set image deployment/backend-deployment \
+        backend-container=aresden113/devops-backend:${{ github.run_number }}
