@@ -24,7 +24,7 @@ def before_request():
 # 🏠 Endpoint principal
 @app.route('/')
 def home():
-    return "🔥 DevOps Platform V10 - Pipeline CI/CD + Kubernetes + despliegue automático en producción + Cluster personal"
+    return "🔥 DevOps Platform V15 - Pipeline CI/CD + Kubernetes + despliegue automático en producción + Cluster personal"
 
 # ❤️ Healthcheck
 @app.route("/health")
