@@ -22,8 +22,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t aresden113/devops-backend:$IMAGE_TAG ./app/server
-
+          docker build --no-cache -t aresden113/devops-backend:$IMAGE_TAG ./app/server
+          
       - name: Push Docker image
         run: |
           docker push aresden113/devops-backend:$IMAGE_TAG
