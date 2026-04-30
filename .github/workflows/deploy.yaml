@@ -13,19 +13,14 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
 
-    - name: Set IMAGE TAG
-      run: echo "IMAGE_TAG=${{ github.run_number }}" >> $GITHUB_ENV
-
     - name: Verify cluster
       run: kubectl get nodes
 
     - name: Apply manifests
       run: kubectl apply -f k8s/
 
-    - name: Update image dynamically
-      run: |
-        kubectl set image deployment/backend-deployment \
-        backend-container=aresden113/devops-backend:$IMAGE_TAG
+    - name: Restart deployment (force latest)
+      run: kubectl rollout restart deployment backend-deployment
 
     - name: Wait rollout
       run: kubectl rollout status deployment/backend-deployment
