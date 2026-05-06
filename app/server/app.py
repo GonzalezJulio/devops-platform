@@ -24,7 +24,7 @@ def before_request():
 # 🏠 Endpoint principal
 @app.route('/')
 def home():
-    return "🔥 DevOps Platform V20 - Pipeline CI/CD + Kubernetes + despliegue automático en producción + Cluster personal"
+    return "🔥 DevOps Platform V100 - ArgoCD 🚀 🚀 🚀 "
 
 # ❤️ Healthcheck
 @app.route("/health")
