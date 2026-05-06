@@ -4,7 +4,7 @@ metadata:
   name: backend-deployment
 
 spec:
-  replicas: 9
+  replicas: 4
 
   selector:
     matchLabels:
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: backend-container
-        image: aresden113/devops-backend:v2
+        image: aresden113/devops-backend:v3
         imagePullPolicy: Always
 
         ports:
