@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: backend-container
-        image: aresden113/devops-backend:v3
+        image: aresden113/devops-backend:c32e38a
         imagePullPolicy: Always
 
         ports:
